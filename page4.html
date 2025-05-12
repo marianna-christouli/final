@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Γράφημα Σκορ</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Μέσος Όρος Σκορ Ανά Κατηγορία</h1>
+  <canvas id="scoreChart" width="400" height="200"></canvas>
+
+  <script>
+    async function fetchData() {
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbx0hHKWS_x9r_u3r8IFH1fh0SbEpkIYemsDLj5vALfs2f6TQpCIuVI4ZUICob_3MKry/exec');
+        const data = await response.json();
+        console.log('Fetched Data:', data);
+
+        const category1Scores = data.map(row => Number(row.q1) + Number(row.q2) + Number(row.q3) + Number(row.q4) + Number(row.q5) + Number(row.q6) + Number(row.q7) + Number(row.q8) + Number(row.q9));
+        const category2Scores = data.map(row => Number(row.q10) + Number(row.q11) + Number(row.q12) + Number(row.q13));
+        const category3Scores = data.map(row => Number(row.q14) + Number(row.q15) + Number(row.q16));
+
+        const avgCategory1 = category1Scores.reduce((a, b) => a + b, 0) / category1Scores.length;
+        const avgCategory2 = category2Scores.reduce((a, b) => a + b, 0) / category2Scores.length;
+        const avgCategory3 = category3Scores.reduce((a, b) => a + b, 0) / category3Scores.length;
+
+        console.log('Average Category 1:', avgCategory1);
+        console.log('Average Category 2:', avgCategory2);
+        console.log('Average Category 3:', avgCategory3);
+
+        createChart(avgCategory1, avgCategory2, avgCategory3);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    function createChart(category1, category2, category3) {
+      const ctx = document.getElementById('scoreChart').getContext('2d');
+      const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Κατηγορία 1', 'Κατηγορία 2', 'Κατηγορία 3'],
+          datasets: [{
+            label: 'Μέσος Όρος Σκορ Ανά Κατηγορία',
+            data: [category1, category2, category3],
+            backgroundColor: ['#ff6384', '#36a2eb', '#4bc0c0']
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+    window.onload = fetchData;
+  </script>
+</body>
+</html>

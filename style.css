@@ -1,0 +1,240 @@
+
+/* Γενικό στυλ για το σώμα της σελίδας */
+body {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background-color: #F9FAFB;
+    margin: 0;
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    color: #1F2937;
+}
+
+/* Κεντρικό κοντέινερ */
+.container, .main-container {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+    width: 90%;
+    max-width: 860px;
+    line-height: 1.8;
+    margin: 30px 0;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #4F46E5;
+    padding: 16px 0;
+    color: white;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.navbar .logo {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* Hero section */
+.hero {
+    background: linear-gradient(to right, #4F46E5, #A78BFA);
+    color: white;
+    padding: 50px 30px;
+    text-align: center;
+    border-radius: 16px;
+    margin-bottom: 40px;
+}
+
+.hero-title {
+    font-size: 36px;
+    font-weight: 800;
+}
+
+/* Τίτλοι */
+h1, h2 {
+    color: #4F46E5;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* Κείμενο */
+p {
+    color: #1F2937;
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+/* Λίστες */
+ul, ol {
+    padding-left: 24px;
+    margin-bottom: 20px;
+}
+
+ul li, ol li {
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+strong {
+    color: #A78BFA;
+}
+
+/* Purpose section */
+.purpose {
+    margin-bottom: 30px;
+}
+
+.purpose strong {
+    color: #4F46E5;
+}
+
+.purpose ul {
+    margin-top: 10px;
+}
+
+/* Buttons */
+button, button.submit {
+    background-color: #4F46E5;
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+button:hover, button.submit:hover {
+    background-color: #4338CA;
+    transform: translateY(-2px);
+}
+
+/* Ειδικά για .submit */
+button.submit {
+    background-color: #A78BFA;
+    color: #fff;
+}
+
+/* Input */
+input[type="text"] {
+    padding: 12px 16px;
+    width: 100%;
+    margin-bottom: 18px;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #4F46E5;
+    outline: none;
+}
+
+/* Υποβολή */
+#submitContainer {
+    display: none;
+    text-align: center;
+    margin-top: 24px;
+}
+
+/* Σελιδοποίηση */
+.switch-page {
+    text-align: center;
+    font-size: 17px;
+    margin-bottom: 24px;
+    color: #4B5563;
+}
+
+.switch-page a {
+    color: #4F46E5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.switch-page a:hover {
+    color: #4338CA;
+    text-decoration: underline;
+}
+
+/* Διόρθωση περιττού */
+.main-container:first-of-type {
+    margin-top: auto;
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container, .main-container {
+        padding: 24px;
+    }
+
+    .hero {
+        padding: 40px 20px;
+    }
+
+    .hero-title {
+        font-size: 28px;
+    }
+
+    button, button.submit {
+        width: 100%;
+        padding: 14px;
+        font-size: 15px;
+    }
+
+    input[type="text"] {
+        font-size: 14px;
+    }
+
+    .navbar .logo {
+        font-size: 22px;
+    }
+
+    h1, h2 {
+        font-size: 22px;
+    }
+
+    p, ul li, ol li {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 22px;
+    }
+
+    .navbar .logo {
+        font-size: 18px;
+    }
+
+    .container, .main-container {
+        padding: 16px;
+    }
+
+    button, button.submit {
+        font-size: 14px;
+    }
+
+    h1, h2 {
+        font-size: 20px;
+    }
+}
+#result {
+    animation: fadeIn 1s ease-out; /* Εφέ fade-in για εμφάνιση */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

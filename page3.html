@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ΒΑΘΜΟΛΟΓΙΑ & ΑΠΑΝΤΗΣΕΙΣ</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.16/jspdf.plugin.autotable.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">Βαθμολογία & Απαντήσεις</div>
+        </div>
+
+        <section class="purpose">
+            <h1>Ανά Ερωτηματολόγιο</h1>
+            <ul id="individualScores" style="list-style: none; padding-left: 0;"></ul>
+            
+            <h1>Συνολική Βαθμολογία</h1>  
+            <p id="totalScore"></p>
+        
+            <h2>Πίνακας Αποτελεσμάτων</h2>
+            <table border="1" cellspacing="0" cellpadding="8" style="width: 100%; border-collapse: collapse; text-align: center;">
+                <thead style="background-color: #f2f2f2;">
+                    <tr>
+                        <th>Κατηγορία</th>
+                        <th>Χαμηλό Επίπεδο Ωριμότητας</th>
+                        <th>Μέτριο Επίπεδο Ωριμότητας</th>
+                        <th>Υψηλό Επίπεδο Ωριμότητας</th>
+                    </tr>
+                </thead>
+                <tbody style="background-color: #f2f2f2;">
+                    <tr>
+                        <td>Ανθρωποκεντρικότητα</td>
+                        <td> 9 - 20</td>
+                        <td>21 - 32</td>
+                        <td>33 - 45</td>
+                    </tr>
+                    <tr>
+                        <td>Κλινική Αποτελεσματικότητα</td>
+                        <td> 4 - 9</td>
+                        <td>10 - 15</td>
+                        <td>16 - 20</td>
+                    </tr>
+                    <tr>
+                        <td>Ασφάλεια - Απόρρητο</td>
+                        <td> 3 - 7</td>
+                        <td> 8 - 11</td>
+                        <td>12 - 15</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>ΣΥΝΟΛΙΚΑ</b></td>
+                        <td><b>16 - 36</b></td>
+                        <td><b>37 - 59</b></td>
+                        <td><b>60 - 80</b></td>
+                    </tr>                
+                </tbody>
+            </table>
+        </section>
+
+        <section class="purpose">
+            <h2>Αναλυτικές Απαντήσεις</h2>
+            <div id="answersDisplay"></div>
+            <div class="export-buttons">
+                <button onclick="exportToCSV()">Εξαγωγή σε CSV</button>
+                <button onclick="exportToPDF()">Εξαγωγή σε PDF</button>
+                <button onclick="exportToTXT()">Εξαγωγή σε TXT</button>
+
+            </div>
+        </section>
+        <div id="repeatPrompt" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+                background-color: #f9f9f9; padding: 20px; border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.2); text-align: center;">
+            <p>Θέλετε να απαντήσετε ξανά το ερωτηματολόγιο για άλλη υπηρεσία;</p>
+            <button onclick="repeatQuestionnaire()">Ναι</button>
+            <button onclick="document.getElementById('repeatPrompt').style.display='none'">Όχι</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        async function fetchUserAnswers() {
+            const userId = sessionStorage.getItem("userId");
+            const scriptUrl = "https://script.google.com/macros/s/AKfycbx0hHKWS_x9r_u3r8IFH1fh0SbEpkIYemsDLj5vALfs2f6TQpCIuVI4ZUICob_3MKry/exec";
+
+            try {
+                const response = await fetch(`${scriptUrl}?userId=${encodeURIComponent(userId)}`);
+                const data = await response.json();
+                displayAnswers(data); // Εμφάνιση των απαντήσεων στη σελίδα
+
+            } catch (error) {
+                console.error("Σφάλμα κατά την ανάκτηση των απαντήσεων:", error);
+            }
+        }
+
+        function displayAnswers(answers) {
+            const container = document.getElementById('answersDisplay');
+            container.innerHTML = "<h3>Αναλυτικές Απαντήσεις</h3>";
+
+            // Ομαδοποιούμε τις απαντήσεις κατά κατηγορία
+            const categories = {
+                "Κατηγορία 1": answers.category1,
+                "Κατηγορία 2": answers.category2,
+                "Κατηγορία 3": answers.category3,
+            };
+
+            // Εμφάνιση των κατηγοριών
+            Object.keys(categories).forEach(category => {
+                container.innerHTML += `<h4>${category}</h4><p>Σκορ: ${categories[category]}</p>`;
+            });
+
+            // Εμφάνιση των ερωτήσεων και απαντήσεων
+            container.innerHTML += "<h3>Ερωτήσεις και Απαντήσεις:</h3><ul>";
+            for (let i = 1; i <= 16; i++) {
+                const question = answers[`q${i}`];
+                container.innerHTML += `<li><b>Ερώτηση ${i}:</b> ${question || "—"}</li>`;
+            }
+            container.innerHTML += "</ul>";
+
+            // Εμφάνιση του συνολικού σκορ
+            const totalScoreContainer = document.getElementById('totalScore');
+            totalScoreContainer.innerHTML = `Συνολική Βαθμολογία: <strong>${answers.totalScore}</strong>`;
+        }
+
+        window.onload = function() {
+            fetchUserAnswers(); // Φόρτωση των απαντήσεων κατά την φόρτωση της σελίδας
+        };
+
+    </script>
+    <script src="sss.js"></script>
+</body>
+</html>
