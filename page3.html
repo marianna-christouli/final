@@ -241,6 +241,7 @@
             try {
                 const response = await fetch(`${scriptUrl}?userId=${encodeURIComponent(userId)}`);
                 const data = await response.json();
+                fetchedAnswers = data;
                 displayAnswers(data); // Εμφάνιση των απαντήσεων στη σελίδα
 
             } catch (error) {
@@ -248,43 +249,59 @@
             }
         }
 
-        function displayAnswers(answers) {
-            console.log("Απαντήσεις που ελήφθησαν:", answers);
-            const container = document.getElementById('answersDisplay');
-            container.innerHTML = "<h3>Αναλυτικές Απαντήσεις</h3>";
+        function displayAnswers(answersArray) {
+            console.log("Απαντήσεις που ελήφθησαν:", answersArray);
 
-            // Ομαδοποιούμε τις απαντήσεις κατά κατηγορία
-            const categories = {
-                "Κατηγορία 1": answers.category1,
-                "Κατηγορία 2": answers.category2,
-                "Κατηγορία 3": answers.category3,
-            };
+            // Ταξινόμηση με βάση το timestamp (το πιο πρόσφατο πρώτο)
+            answersArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
 
-            // Εμφάνιση των κατηγοριών
-            Object.keys(categories).forEach(category => {
-                container.innerHTML += `<h4>${category}</h4><p>Σκορ: ${categories[category]}</p>`;
+            // Παίρνουμε την πιο πρόσφατη εγγραφή
+            const answers = answersArray[0];
+
+            // Καθαρίζουμε κενά από τα keys
+            const cleanedAnswers = {};
+            Object.keys(answers).forEach(key => {
+                cleanedAnswers[key.trim()] = answers[key];
             });
 
-            // Εμφάνιση των ερωτήσεων και απαντήσεων
-            container.innerHTML += "<h3>Ερωτήσεις και Απαντήσεις:</h3><ul>";
+            // Κατηγορίες: Ανά Ερωτηματολόγιο
+            const individualScoresList = document.getElementById("individualScores");
+            individualScoresList.innerHTML = ""; // Καθαρίζει παλιά αποτελέσματα
+
+            const categories = {
+                "Ανθρωποκεντρικότητα": cleanedAnswers.category1 || "Δεν υπάρχουν δεδομένα",
+                "Κλινική Αποτελεσματικότητα": cleanedAnswers.category2 || "Δεν υπάρχουν δεδομένα",
+                "Ασφάλεια και Απόρρητο": cleanedAnswers.category3 || "Δεν υπάρχουν δεδομένα",
+            };
+
+            Object.entries(categories).forEach(([categoryName, score]) => {
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `<strong>${categoryName}</strong>: Σκορ: ${score}`;
+                individualScoresList.appendChild(listItem);
+            });
+
+            const container = document.getElementById('answersDisplay');
+            // Ερωτήσεις - Απαντήσεις
+            //container.innerHTML += "<h3>Ερωτήσεις και Απαντήσεις:</h3><ul>";
             for (let i = 1; i <= 16; i++) {
                 const qKey = `q${i}`;
-                const value = answers[qKey];
+                const value = cleanedAnswers[qKey];
                 const title = questionTitles[qKey] || qKey;
                 const fullAnswer = answerTexts[qKey]?.[value] || "-";
 
                 container.innerHTML += `
-                    <li><strong>Ερώτηση:</strong> ${title}<br>
-                        <strong>Απάντηση:</strong> ${fullAnswer}</li>
+                    <strong>Ερώτηση:</strong> ${title}<br>
+                        <strong>Απάντηση:</strong> ${fullAnswer} <br> <br>
                 `;
             }
-
             container.innerHTML += "</ul>";
 
-            // Εμφάνιση του συνολικού σκορ
+            // Συνολικό σκορ
             const totalScoreContainer = document.getElementById('totalScore');
-            totalScoreContainer.innerHTML = `Συνολική Βαθμολογία: <strong>${answers.totalScore}</strong>`;
+            totalScoreContainer.innerHTML = `Συνολική Βαθμολογία: <strong>${cleanedAnswers.totalScore || "Δεν υπάρχουν δεδομένα"}</strong>`;
         }
+
+
 
         window.onload = function() {
             fetchUserAnswers(); // Φόρτωση των απαντήσεων κατά την φόρτωση της σελίδας
@@ -296,8 +313,79 @@
                  window.location.href = 'page2.html';  // Αντικαταστήστε με τη διεύθυνση του δεύτερου ερωτηματολογίου
             }, 1500);
         }
+
+        function exportToCSV() {
+            if (!fetchedAnswers.length) return alert("Δεν υπάρχουν απαντήσεις προς εξαγωγή.");
+
+            const headers = Object.keys(fetchedAnswers[0]);
+            const csvRows = [headers.join(",")];
+
+            fetchedAnswers.forEach(obj => {
+                const row = headers.map(key => `"${(obj[key] || "").toString().replace(/"/g, '""')}"`);
+                csvRows.push(row.join(","));
+            });
+
+            const csvContent = csvRows.join("\n");
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "apantiseis_oloi.csv";
+            link.click();
+        }
+
+        function exportToTXT() {
+            if (!fetchedAnswers.length) return alert("Δεν υπάρχουν απαντήσεις προς εξαγωγή.");
+
+            let txtContent = "";
+
+            fetchedAnswers.forEach((entry, index) => {
+                txtContent += `--- Εγγραφή ${index + 1} ---\n`;
+                Object.entries(entry).forEach(([key, value]) => {
+                    txtContent += `${key}: ${value}\n`;
+                });
+                txtContent += "\n";
+            });
+
+            const blob = new Blob([txtContent], { type: "text/plain;charset=utf-8;" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "apantiseis_oloi.txt";
+            link.click();
+        }
+
+        function exportToPDF() {
+            if (!fetchedAnswers.length) return alert("Δεν υπάρχουν απαντήσεις προς εξαγωγή.");
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            let y = 20;
+
+            doc.setFontSize(16);
+            doc.text("Απαντήσεις Χρήστη", 14, 15);
+
+            fetchedAnswers.forEach((entry, index) => {
+                doc.setFontSize(12);
+                doc.text(`Εγγραφή ${index + 1}`, 14, y);
+                y += 7;
+
+                Object.entries(entry).forEach(([key, value]) => {
+                    doc.text(`${key}: ${value}`, 14, y);
+                    y += 6;
+
+                    if (y > 270) {
+                        doc.addPage();
+                        y = 20;
+                    }
+                });
+
+                y += 10;
+            });
+
+            doc.save("apantiseis_oloi.pdf");
+        }
+
     </script>
- <!--  <script src="ans.js" defer></script>--> 
-    <script src="sss.js" defer></script>
+ <!--  <script src="ans.js" defer></script>
+    <script src="sss.js" defer></script> --> 
 </body>
 </html>

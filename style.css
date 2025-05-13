@@ -238,3 +238,55 @@ input[type="text"]:focus {
         opacity: 1;
     }
 }
+
+/* ...[υπόλοιπο CSS όπως το έστειλες]... */
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* ========================= */
+/* ΝΕΟ: Στοίχιση κουμπιών εξαγωγής */
+/* ========================= */
+
+.export-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+    flex-wrap: wrap; /* Για responsive εμφάνιση */
+}
+
+.export-buttons button {
+    padding: 12px 20px;
+    font-size: 15px;
+    border-radius: 8px;
+    background-color: #4F46E5;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.export-buttons button:hover {
+    background-color: #4338CA;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 480px) {
+    .export-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .export-buttons button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
