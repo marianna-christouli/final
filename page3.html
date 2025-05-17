@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.16/jspdf.plugin.autotable.min.js"></script>
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <div class="container">
@@ -18,10 +19,18 @@
         <section class="purpose">
             <h1>Ανά Ερωτηματολόγιο</h1>
             <ul id="individualScores" style="list-style: none; padding-left: 0;"></ul>
+
+            <div class="spinner-wrapper" id="loadingSpinner1" style="display: flex; justify-content: center;">
+                <div class="spinner"></div>
+            </div>
             
             <h1>Συνολική Βαθμολογία</h1>  
             <p id="totalScore"></p>
-        
+
+            <div class="spinner-wrapper" id="loadingSpinner2" style="display: flex; justify-content: center;">
+                <div class="spinner"></div>
+            </div>
+            
             <h2>Πίνακας Αποτελεσμάτων</h2>
             <table border="1" cellspacing="0" cellpadding="8" style="width: 100%; border-collapse: collapse; text-align: center;">
                 <thead style="background-color: #f2f2f2;">
@@ -65,6 +74,10 @@
         <section class="purpose">
             <h2>Αναλυτικές Απαντήσεις</h2>
             <div id="answersDisplay"></div>
+            <div class="spinner-wrapper" id="loadingSpinner3" style="display: flex; justify-content: center;">
+                <div class="spinner"></div>
+            </div>
+            
             <div class="export-buttons">
                 <button onclick="exportToCSV()">Εξαγωγή σε CSV</button>
                 <button onclick="exportToPDF()">Εξαγωγή σε PDF</button>
@@ -76,15 +89,7 @@
                     Για να μεταβείτε στα στατιστικά πατήστε <a href="page4.html">εδώ</a>.
             </p>
         </section>
-        <div id="repeatPrompt" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-                background-color: #f9f9f9; padding: 20px; border-radius: 10px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.2); text-align: center;">
-            <p>Θέλετε να απαντήσετε ξανά το ερωτηματολόγιο για άλλη υπηρεσία;</p>
-            <button onclick="repeatQuestionnaire()">Ναι</button>
-            <button onclick="document.getElementById('repeatPrompt').style.display='none'">Όχι</button>
-            </div>
-        </div>
-    </div>
+</div>
 
     <script>
 
@@ -242,6 +247,8 @@
             const userId = sessionStorage.getItem("userId");
             const scriptUrl = "https://script.google.com/macros/s/AKfycbwLq4GsrjigTjy0bgF1_czclUcgk9icc9oUw0GcLk-8fDzhgvrYkrBXKU3eEktmxkTI/exec";
 
+            showSpinners();
+
             try {
                 const response = await fetch(`${scriptUrl}?userId=${encodeURIComponent(userId)}`);
                 const data = await response.json();
@@ -250,6 +257,9 @@
 
             } catch (error) {
                 console.error("Σφάλμα κατά την ανάκτηση των απαντήσεων:", error);
+            } finally {
+                // Απόκρυψη spinner
+                hideSpinners();
             }
         }
 
@@ -388,8 +398,18 @@
             doc.save("apantiseis_oloi.pdf");
         }
 
+    function showSpinners() {
+        document.querySelectorAll('.spinner-wrapper').forEach(el => {
+        el.style.display = 'flex';
+        });
+    }
+
+    function hideSpinners() {
+        document.querySelectorAll('.spinner-wrapper').forEach(el => {
+        el.style.display = 'none';
+        });
+    }
+
     </script>
- <!--  <script src="ans.js" defer></script>
-    <script src="sss.js" defer></script> --> 
 </body>
 </html>

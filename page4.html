@@ -10,6 +10,7 @@
   <h2>Μέσος Όρος Ανά Κατηγορία</h2>
   <div class="chart-wrapper">
     <div class="chart-box">
+      <div class="spinner" id="spinner-categoryChart"></div>
       <canvas id="categoryChart"></canvas>
     </div>
   </div>
@@ -18,28 +19,24 @@
   <div class="chart-wrapper">
     <div class="chart-box">
       <h3>Κατηγορία 1 (Q1 - Q9)</h3>
+      <div class="spinner" id="spinner-category1Chart"></div>
       <canvas id="category1Chart"></canvas>
     </div>
     <div class="chart-box">
       <h3>Κατηγορία 2 (Q10 - Q13)</h3>
+      <div class="spinner" id="spinner-category2Chart"></div>
       <canvas id="category2Chart"></canvas>
     </div>
     <div class="chart-box">
       <h3>Κατηγορία 3 (Q14 - Q16)</h3>
+      <div class="spinner" id="spinner-category3Chart"></div>
       <canvas id="category3Chart"></canvas>
     </div>
   </div>
-    <!-- Modal για μεγάλο γράφημα -->
-    <div id="chartModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:9999;">
-    <div style="position:relative; background:#fff; border-radius:12px; padding:20px; max-width:90%; max-height:90%; box-shadow:0 4px 20px rgba(0,0,0,0.3);">
-        <canvas id="modalChart" style="max-width:100%; max-height:80vh;"></canvas>
-        <button id="closeModal" style="position:absolute; top:10px; right:10px; background:#4F46E5; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer;">Κλείσιμο</button>
-    </div>
-    </div>
-
     <h2>Τυπική Απόκλιση Ανά Κατηγορία</h2>
     <div class="chart-wrapper">
     <div class="chart-box">
+        <div class="spinner" id="spinner-stdDevCategoryChart"></div>
         <canvas id="stdDevCategoryChart"></canvas>
     </div>
     </div>
@@ -48,191 +45,21 @@
     <div class="chart-wrapper">
     <div class="chart-box">
         <h3>Κατηγορία 1 (Q1 - Q9)</h3>
+        <div class="spinner" id="spinner-stdDevCategory1Chart"></div>
         <canvas id="stdDevCategory1Chart"></canvas>
     </div>
     <div class="chart-box">
         <h3>Κατηγορία 2 (Q10 - Q13)</h3>
+        <div class="spinner" id="spinner-stdDevCategory2Chart"></div>
         <canvas id="stdDevCategory2Chart"></canvas>
     </div>
     <div class="chart-box">
         <h3>Κατηγορία 3 (Q14 - Q16)</h3>
+        <div class="spinner" id="spinner-stdDevCategory3Chart"></div>
         <canvas id="stdDevCategory3Chart"></canvas>
     </div>
     </div>
-<!--
-  <script>
-    const scriptUrl = "https://script.google.com/macros/s/AKfycbwLq4GsrjigTjy0bgF1_czclUcgk9icc9oUw0GcLk-8fDzhgvrYkrBXKU3eEktmxkTI/exec";
-
-    async function fetchAnswers() {
-      const response = await fetch(scriptUrl);
-      const data = await response.json();
-      return data;
-    }
-
-    function calculateAverages(data) {
-      const questionTotals = Array(17).fill(0);
-      const questionCounts = Array(17).fill(0);
-
-      data.forEach(entry => {
-        for (let i = 1; i <= 16; i++) {
-          const val = parseFloat(entry[`q${i}`]);
-          if (!isNaN(val)) {
-            questionTotals[i] += val;
-            questionCounts[i]++;
-          }
-        }
-      });
-
-      const avgPerQuestion = questionTotals.map((total, i) =>
-        questionCounts[i] ? (total / questionCounts[i]).toFixed(2) : 0
-      );
-
-      const avgCategory = [
-        averageRange(avgPerQuestion, 1, 9),
-        averageRange(avgPerQuestion, 10, 13),
-        averageRange(avgPerQuestion, 14, 16)
-      ];
-
-      return { avgCategory, avgPerQuestion };
-    }
-
-    function averageRange(arr, start, end) {
-      let sum = 0, count = 0;
-      for (let i = start; i <= end; i++) {
-        const val = parseFloat(arr[i]);
-        if (!isNaN(val)) {
-          sum += val;
-          count++;
-        }
-      }
-      return count ? (sum / count).toFixed(2) : 0;
-    }
-
-    function renderChart(ctx, labels, data, label, colors) {
-      new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [{
-            label,
-            data,
-            backgroundColor: colors,
-            borderColor: colors.map(c => c.replace("0.6", "1")),
-            borderWidth: 1
-          }]
-        },
-        options: {
-          responsive: true,
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 5
-            }
-          }
-        }
-      });
-    }
-
-
-    async function initCharts() {
-      const answers = await fetchAnswers();
-      const { avgCategory, avgPerQuestion } = calculateAverages(answers);
-    // Υπολογισμός τυπικής απόκλισης
-    function calculateStdDev(arr) {
-        const n = arr.length;
-        if (n === 0) return 0;
-        const mean = arr.reduce((a, b) => a + b, 0) / n;
-        const variance = arr.reduce((a, b) => a + (b - mean) ** 2, 0) / n;
-        return Math.sqrt(variance).toFixed(2);
-    }
-
-    // Παίρνει όλες τις απαντήσεις για μια ερώτηση σε array
-    function getAnswersPerQuestion(data, questionNumber) {
-    return data
-        .map(entry => parseFloat(entry[`q${questionNumber}`]))
-        .filter(val => !isNaN(val));
-    }
-
-    // Υπολογισμός τυπικής απόκλισης ανά ερώτηση
-    const stdDevPerQuestion = [];
-    for(let i = 1; i <= 16; i++) {
-        const answersQ = getAnswersPerQuestion(answers, i);
-        stdDevPerQuestion.push(parseFloat(calculateStdDev(answersQ)));
-    }
-
-    // Υπολογισμός μέσης τυπικής απόκλισης ανά κατηγορία
-    function averageRange(arr, start, end) {
-        let sum = 0, count = 0;
-        for(let i = start; i <= end; i++) {
-            if(!isNaN(arr[i])) {
-            sum += parseFloat(arr[i]);
-            count++;
-            }
-        }
-        return count ? (sum / count).toFixed(2) : 0;
-    }
-
-    const stdDevCategory = [
-        averageRange(stdDevPerQuestion, 1, 9),
-        averageRange(stdDevPerQuestion, 10, 13),
-        averageRange(stdDevPerQuestion, 14, 16)
-    ];
-      const colors = [
-        'rgba(79, 70, 229, 0.6)', // Indigo
-        'rgba(167, 139, 250, 0.6)', // Purple
-        'rgba(34, 197, 94, 0.6)', // Green
-        'rgba(251, 191, 36, 0.6)', // Yellow
-        'rgba(239, 68, 68, 0.6)', // Red
-        'rgba(16, 185, 129, 0.6)', // Teal
-        'rgba(59, 130, 246, 0.6)', // Blue
-        'rgba(245, 158, 11, 0.6)', // Orange
-        'rgba(236, 72, 153, 0.6)' // Pink
-      ];
-
-      renderChart(
-        document.getElementById('categoryChart'),
-        ['Κατηγορία 1', 'Κατηγορία 2', 'Κατηγορία 3'],
-        avgCategory,
-        'Μ.Ο. Κατηγορίας',
-        [colors[0], colors[1], colors[2]]
-      );
-
-      renderChart(
-        document.getElementById('category1Chart'),
-        Array.from({ length: 9 }, (_, i) => `Q${i + 1}`),
-        avgPerQuestion.slice(1, 10),
-        'Κατηγορία 1',
-        colors.slice(0, 9)
-      );
-
-      renderChart(
-        document.getElementById('category2Chart'),
-        ['Q10', 'Q11', 'Q12', 'Q13'],
-        avgPerQuestion.slice(10, 14),
-        'Κατηγορία 2',
-        colors.slice(2, 6)
-      );
-
-      renderChart(
-        document.getElementById('category3Chart'),
-        ['Q14', 'Q15', 'Q16'],
-        avgPerQuestion.slice(14, 17),
-        'Κατηγορία 3',
-        colors.slice(6, 9)
-      );
-
-      renderChart(
-        document.getElementById('stdDevCategoryChart'),
-        ['Κατηγορία 1', 'Κατηγορία 2', 'Κατηγορία 3'],
-        stdDevCategory,
-        'Τυπική Απόκλιση',
-        [colors[3], colors[4], colors[5]]
-        );
-    }
-
-    initCharts();
-  </script>-->
-
+ 
   <script>
   const scriptUrl = "https://script.google.com/macros/s/AKfycbwLq4GsrjigTjy0bgF1_czclUcgk9icc9oUw0GcLk-8fDzhgvrYkrBXKU3eEktmxkTI/exec";
 
@@ -315,6 +142,11 @@
         }
       }
     });
+    // ✅ Απόκρυψη spinner και εμφάνιση γραφήματος
+    const spinnerId = `spinner-${ctx.id}`;
+    const spinner = document.getElementById(spinnerId);
+    if (spinner) spinner.style.display = "none";
+    ctx.style.display = "block";
   }
 
 
@@ -432,6 +264,19 @@
   }
 
   initCharts();
+
+    // Όλα τα containers των γραφημάτων
+  const chartBoxes = document.querySelectorAll('.chart-box');
+
+  chartBoxes.forEach(box => {
+    box.addEventListener('click', () => {
+      // Αφαιρούμε highlight από όλα
+      chartBoxes.forEach(b => b.classList.remove('highlighted'));
+      // Προσθέτουμε highlight στο πατημένο
+      box.classList.add('highlighted');
+    });
+  });
+
 </script>
 
 </body>
