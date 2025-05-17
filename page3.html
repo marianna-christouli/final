@@ -71,6 +71,10 @@
                 <button onclick="exportToTXT()">Εξαγωγή σε TXT</button>
 
             </div>
+
+            <p class="switch-page">
+                    Για να μεταβείτε στα στατιστικά πατήστε <a href="page4.html">εδώ</a>.
+            </p>
         </section>
         <div id="repeatPrompt" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
                 background-color: #f9f9f9; padding: 20px; border-radius: 10px;
@@ -236,7 +240,7 @@
 
         async function fetchUserAnswers() {
             const userId = sessionStorage.getItem("userId");
-            const scriptUrl = "https://script.google.com/macros/s/AKfycbx0hHKWS_x9r_u3r8IFH1fh0SbEpkIYemsDLj5vALfs2f6TQpCIuVI4ZUICob_3MKry/exec";
+            const scriptUrl = "https://script.google.com/macros/s/AKfycbwLq4GsrjigTjy0bgF1_czclUcgk9icc9oUw0GcLk-8fDzhgvrYkrBXKU3eEktmxkTI/exec";
 
             try {
                 const response = await fetch(`${scriptUrl}?userId=${encodeURIComponent(userId)}`);
