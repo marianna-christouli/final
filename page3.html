@@ -288,11 +288,38 @@
                 "Ασφάλεια και Απόρρητο": cleanedAnswers.category3 || "Δεν υπάρχουν δεδομένα",
             };
 
+            // Συνάρτηση για καθορισμό επιπέδου και χρώματος
+            function getLevel(score, ranges) {
+                if (score <= ranges.lowMax) {
+                    return { label: "Χαμηλό", color: "#FF4C4C" };
+                } else if (score <= ranges.mediumMax) {
+                    return { label: "Μέτριο", color: "#FF8C00" };
+                } else {
+                    return { label: "Υψηλό", color: "#32CD32" };
+                }
+            }
+
+            const score1 = parseInt(cleanedAnswers.category1);
+            const score2 = parseInt(cleanedAnswers.category2);
+            const score3 = parseInt(cleanedAnswers.category3);
+            const totalScore = parseInt(cleanedAnswers.totalScore);
+
+            const level1 = getLevel(score1, { lowMax: 20, mediumMax: 32 });
+            const level2 = getLevel(score2, { lowMax: 9, mediumMax: 15 });
+            const level3 = getLevel(score3, { lowMax: 7, mediumMax: 11 });
+            const totalLevel = getLevel(totalScore, { lowMax: 36, mediumMax: 59 });
+
+
+            const levels = [level1, level2, level3];
+            let i = 0;
             Object.entries(categories).forEach(([categoryName, score]) => {
+                const level = levels[i++];
                 const listItem = document.createElement("li");
-                listItem.innerHTML = `<strong>${categoryName}</strong>: Σκορ: ${score}`;
+                listItem.innerHTML = `<strong>${categoryName}</strong>: Σκορ: ${score} 
+                    <span style="color: ${level.color}; font-weight: bold;">(${level.label})</span>`;
                 individualScoresList.appendChild(listItem);
             });
+
 
             const container = document.getElementById('answersDisplay');
             // Ερωτήσεις - Απαντήσεις
@@ -312,7 +339,9 @@
 
             // Συνολικό σκορ
             const totalScoreContainer = document.getElementById('totalScore');
-            totalScoreContainer.innerHTML = `Συνολική Βαθμολογία: <strong>${cleanedAnswers.totalScore || "Δεν υπάρχουν δεδομένα"}</strong>`;
+            totalScoreContainer.innerHTML = `Συνολική Βαθμολογία: <strong>${totalScore}</strong> 
+            <span style="color: ${totalLevel.color}; font-weight: bold;">(${totalLevel.label})</span>`;
+
         }
 
 

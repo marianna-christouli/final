@@ -376,8 +376,6 @@
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        // Εμφάνιση spinner πριν ξεκινήσει η αποστολή
-        document.getElementById("loadingSpinner").classList.add("active");
 
         const getRadioValue = (name) => {
             const selected = document.querySelector(`input[name="${name}"]:checked`);
@@ -395,6 +393,9 @@
                 return;
             }
         }
+
+        // Εμφάνιση spinner πριν ξεκινήσει η αποστολή
+        document.getElementById("loadingSpinner").classList.add("active");
         
         // Συλλογή απαντήσεων
         const answers = [];
@@ -488,6 +489,7 @@
 
             form.reset();
         } catch (error) {
+            document.getElementById("loadingSpinner").classList.remove("active");
             resultDiv.textContent = 'Σφάλμα σύνδεσης με τον server. Παρακαλώ προσπαθήστε ξανά.';
         }
     });
