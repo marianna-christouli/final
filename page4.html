@@ -1,63 +1,119 @@
 <!DOCTYPE html>
 <html lang="el">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"> 
   <title>Γραφήματα Κατηγοριών</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Μέσος Όρος Ανά Κατηγορία</h2>
+  <h2>Αποτελέσματα Χρήστη</h2>
+  <div class="chart-box">
+    <div id="spinner-pieCharts" class="spinner"></div> 
+      <div id="pieChartsContainer" class="chart-wrapper pie-charts" style="display:none;"></div>
+      <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+          <button class="download-btn" onclick="downloadChartImage('pieChartsContainer', 'Γράφημα Αποτελεσμάτων')">Λήψη Εικόνας</button>
+     </div>
+  </div>
+
+ <div class="main-content">
+  <h2>Μέσος Όρος Ανά Διάσταση</h2>
   <div class="chart-wrapper">
     <div class="chart-box">
       <div class="spinner" id="spinner-categoryChart"></div>
       <canvas id="categoryChart"></canvas>
+      <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+          <button class="download-btn" onclick="downloadChartImage('categoryChart', 'ΜΟ')">Λήψη Εικόνας</button>
+    </div>
+ </div>
+</div>
+
+  <h2>Μέσος Όρος Ερωτήσεων Ανά Διάσταση</h2>
+  <div class="chart-wrapper">
+    <div class="chart-box">
+      <h3>Ανθρωποκεντρικότητα <br>(Ερώτηση 1 - Ερώτηση 9)</h3>
+      <div class="spinner" id="spinner-category1Chart"></div>
+      <canvas id="category1Chart"></canvas>
+      <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+          <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <h3>Κλινική Αποτελεσματικότητα <br>(Ερώτηση 10 - Ερώτηση 13)</h3>
+      <div class="spinner" id="spinner-category2Chart"></div>
+      <canvas id="category2Chart"></canvas>
+      <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+          <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+      </div>
+    </div>
+
+    <div class="chart-box">
+      <h3>Ασφάλεια - Απόρρητο <br>(Ερώτηση 14 - Ερώτηση 16)</h3>
+      <div class="spinner" id="spinner-category3Chart"></div>
+      <canvas id="category3Chart"></canvas>
+      <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+          <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+      </div>
     </div>
   </div>
 
-  <h2>Μέσος Όρος Ερωτήσεων Ανά Κατηγορία</h2>
-  <div class="chart-wrapper">
-    <div class="chart-box">
-      <h3>Κατηγορία 1 (Q1 - Q9)</h3>
-      <div class="spinner" id="spinner-category1Chart"></div>
-      <canvas id="category1Chart"></canvas>
-    </div>
-    <div class="chart-box">
-      <h3>Κατηγορία 2 (Q10 - Q13)</h3>
-      <div class="spinner" id="spinner-category2Chart"></div>
-      <canvas id="category2Chart"></canvas>
-    </div>
-    <div class="chart-box">
-      <h3>Κατηγορία 3 (Q14 - Q16)</h3>
-      <div class="spinner" id="spinner-category3Chart"></div>
-      <canvas id="category3Chart"></canvas>
-    </div>
-  </div>
     <h2>Τυπική Απόκλιση Ανά Κατηγορία</h2>
     <div class="chart-wrapper">
     <div class="chart-box">
         <div class="spinner" id="spinner-stdDevCategoryChart"></div>
         <canvas id="stdDevCategoryChart"></canvas>
-    </div>
+        <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+          <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+        </div>
+      </div>
     </div>
 
     <h2>Τυπική Απόκλιση Ερωτήσεων Ανά Κατηγορία</h2>
     <div class="chart-wrapper">
     <div class="chart-box">
-        <h3>Κατηγορία 1 (Q1 - Q9)</h3>
+        <h3>Ανθρωποκεντρικότητα <br>(Ερώτηση 1 - Ερώτηση 9)</h3>
         <div class="spinner" id="spinner-stdDevCategory1Chart"></div>
         <canvas id="stdDevCategory1Chart"></canvas>
+        <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+             <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+      </div>
     </div>
+
     <div class="chart-box">
-        <h3>Κατηγορία 2 (Q10 - Q13)</h3>
+        <h3>Κλινική Αποτελεσματικότητα <br>(Ερώτηση 10 - Ερώτηση 13)</h3>
         <div class="spinner" id="spinner-stdDevCategory2Chart"></div>
         <canvas id="stdDevCategory2Chart"></canvas>
+        <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+            <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+        </div>
     </div>
+
     <div class="chart-box">
-        <h3>Κατηγορία 3 (Q14 - Q16)</h3>
+        <h3>Ασφάλεια - Απόρρητο <br>(Ερώτηση 14 - Ερώτηση 16)</h3>
         <div class="spinner" id="spinner-stdDevCategory3Chart"></div>
         <canvas id="stdDevCategory3Chart"></canvas>
+        <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+            <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+      </div>
     </div>
+  </div>
+
+    <div style="text-align: center; margin: 40px 0;">
+      <button onclick="downloadAllCharts()" style="
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #4f46e5;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      ">
+        ⬇️ Λήψη Όλων των Γραφημάτων
+      </button>
+    </div>
+
+
     </div>
       <p class="switch-page">
          <b>Για να αξιολογήσετε νέα υπηρεσία πατήστε <a href="ins.html">εδώ</a>.</b><br>
@@ -65,6 +121,36 @@
       </p>
   <script>
   const scriptUrl = "https://script.google.com/macros/s/AKfycbwLq4GsrjigTjy0bgF1_czclUcgk9icc9oUw0GcLk-8fDzhgvrYkrBXKU3eEktmxkTI/exec";
+  const colors = [
+      'rgba(79, 70, 229, 0.6)',  // Indigo
+      'rgba(167, 139, 250, 0.6)', // Purple
+      'rgba(34, 197, 94, 0.6)',   // Green
+      'rgba(251, 191, 36, 0.6)',  // Yellow
+      'rgba(239, 68, 68, 0.6)',   // Red
+      'rgba(16, 185, 129, 0.6)',  // Teal
+      'rgba(59, 130, 246, 0.6)',  // Blue
+      'rgba(245, 158, 11, 0.6)',  // Orange
+      'rgba(236, 72, 153, 0.6)'   // Pink
+    ];
+
+  const queTitles = {
+      q1: "Ικανοποίηση – Εμπειρία – Αποδοχή",
+      q2: "Κατανόηση των Πληροφοριών και Εμπιστοσύνη",
+      q3: "Ικανότητα Χρήσης της Εφαρμογής – Προσβασιμότητα",
+      q4: "Τεχνολογική Υποδομή",
+      q5: "Ψηφιακός Αλφαβητισμός",
+      q6: "Επικοινωνία",
+      q7: "Πρόσβαση στην Φροντίδα για Ασθενείς, Οικογένεια και / ή Φροντιστές",
+      q8: "Εμπειρία των Μελών της Ομάδας Φροντίδας",
+      q9: "Ηθικές Αρχές - Προώθηση και Μάρκετινγκ",
+      q10: "Ετοιμότητα Εργατικού Δυναμικού",
+      q11: "Διαγνωστική Ακρίβεια",
+      q12: "Επιπτώσεις στη Θνησιμότητα, στη Νοσηρότητα, στην HRQoL, καθώς και στις Συνήθειες - Συμπεριφορές",
+      q13: "Χρήση Υπηρεσιών Υγείας",
+      q14: "Λειτουργική Ακεραιότητα και Ακεραιότητα Υποδομών",
+      q15: "Ψυχολογική και Συναισθηματική Ασφάλεια",
+      q16: "Διακυβέρνηση"
+    };
 
   async function fetchAnswers() {
     const response = await fetch(scriptUrl);
@@ -112,7 +198,7 @@
   }
 
   function renderChart(ctx, labels, data, label, colors, stdDevs = null) {
-    new Chart(ctx, {
+    const chart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels,
@@ -126,7 +212,21 @@
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
+          legend: {
+            display: true, // Εμφάνιση υπομνήματος
+            labels: {
+              generateLabels: function(chart) {
+                return labels.map((label, index) => ({
+                  text: label,
+                  fillStyle: colors[index],
+                  strokeStyle: colors[index],
+                  index: index
+                }));
+              }
+            }
+          },
           tooltip: {
             callbacks: {
               label: function(context) {
@@ -141,20 +241,108 @@
           y: {
             beginAtZero: true,
             max: 5
+          },
+          x: {
+            display: false  // Απόκρυψη labels κάτω από τις μπάρες
           }
         }
       }
     });
-    // ✅ Απόκρυψη spinner και εμφάνιση γραφήματος
+
+    // Απόκρυψη spinner και εμφάνιση καμβά
     const spinnerId = `spinner-${ctx.id}`;
     const spinner = document.getElementById(spinnerId);
     if (spinner) spinner.style.display = "none";
     ctx.style.display = "block";
+
+    return chart;
+  }
+
+
+  async function createPieChartsPerService(answers) {
+    const userIdFromSession = sessionStorage.getItem('userId'); // Παίρνουμε το userId
+    const spinner = document.getElementById('spinner-pieCharts');
+    const container = document.getElementById('pieChartsContainer');
+  
+    spinner.style.display = 'block';      // Εμφάνιση spinner πριν ξεκινήσει
+    container.style.display = 'none';     // Απόκρυψη περιεχομένου
+    // Φιλτράρουμε τις απαντήσεις με βάση το userId
+    const filteredAnswers = userIdFromSession 
+      ? answers.filter(entry => entry.userId === userIdFromSession) 
+      : answers;  // Αν δεν υπάρχει userId στο session, δείξε όλα
+
+    const pieChartsContainer = document.getElementById('pieChartsContainer');
+    pieChartsContainer.innerHTML = ''; // Καθαρισμός προηγούμενων
+
+    if (filteredAnswers.length === 0) {
+      spinner.style.display = 'none';     // Απόκρυψη spinner
+      container.style.display = 'block';  // Εμφάνιση container (με μήνυμα)
+      pieChartsContainer.innerHTML = '<p>Δεν βρέθηκαν δεδομένα για τον συγκεκριμένο χρήστη.</p>';
+      return;
+    }
+
+    // Ομαδοποίηση όπως πριν
+    const serviceGroups = {};
+    filteredAnswers.forEach(entry => {
+      const service = entry.service || 'Άγνωστη Υπηρεσία';
+      if (!serviceGroups[service]) {
+        serviceGroups[service] = { category1: 0, category2: 0, category3: 0 };
+      }
+      serviceGroups[service].category1 += parseFloat(entry.category1) || 0;
+      serviceGroups[service].category2 += parseFloat(entry.category2) || 0;
+      serviceGroups[service].category3 += parseFloat(entry.category3) || 0;
+    });
+
+    let index = 0;
+    for (const [service, scores] of Object.entries(serviceGroups)) {
+      const chartWrapper = document.createElement('div');
+      chartWrapper.classList.add('chart-box');
+      chartWrapper.innerHTML = `
+          <h3>${service}</h3>
+          <canvas id="pieChart${index}"></canvas>
+          <button onclick="downloadChartImage('pieChart${index}', 'PieChart_${service.replaceAll(' ', '_')}')">
+            Λήψη Εικόνας
+          </button>
+        `;
+
+      pieChartsContainer.appendChild(chartWrapper);
+
+      const ctx = document.getElementById(`pieChart${index}`).getContext('2d');
+
+      new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ['Ανθρωποκεντρικότητα', 'Κλινική Αποτελεσματικότητα', 'Απόρρητο - Ασφάλεια'],
+          datasets: [{
+            label: 'Συνολικό Σκορ',
+            data: [scores.category1, scores.category2, scores.category3],
+            backgroundColor: colors,
+            borderColor: ['#fff', '#fff', '#fff'],
+            borderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: ctx => `${ctx.label}: ${ctx.raw.toFixed(2)}`
+              }
+            }
+          }
+        }
+      });
+
+      index++;
+    }
+      spinner.style.display = 'none';    // Κρύβουμε το spinner μετά τη φόρτωση
+      container.style.display = 'block'; // Εμφανίζουμε τα γραφήματα
   }
 
 
   async function initCharts() {
     const answers = await fetchAnswers();
+    createPieChartsPerService(answers);
     const { avgCategory, avgPerQuestion } = calculateAverages(answers);
 
     function calculateStdDev(arr) {
@@ -188,21 +376,9 @@
     const stdDevCategory3Questions = stdDevPerQuestion.slice(14, 17); // Q14 - Q16
 
 
-    const colors = [
-      'rgba(79, 70, 229, 0.6)',  // Indigo
-      'rgba(167, 139, 250, 0.6)', // Purple
-      'rgba(34, 197, 94, 0.6)',   // Green
-      'rgba(251, 191, 36, 0.6)',  // Yellow
-      'rgba(239, 68, 68, 0.6)',   // Red
-      'rgba(16, 185, 129, 0.6)',  // Teal
-      'rgba(59, 130, 246, 0.6)',  // Blue
-      'rgba(245, 158, 11, 0.6)',  // Orange
-      'rgba(236, 72, 153, 0.6)'   // Pink
-    ];
-
     renderChart(
       document.getElementById('categoryChart'),
-      ['Κατηγορία 1', 'Κατηγορία 2', 'Κατηγορία 3'],
+      ['Ανθρωποκεντρικότητα', 'Κλινική Αποτελεσματικότητα', 'Ασφάλεια - Απόρρητο'],
       avgCategory,
       'Μ.Ο. Κατηγορίας',
       [colors[0], colors[1], colors[2]]
@@ -210,31 +386,31 @@
 
     renderChart(
       document.getElementById('category1Chart'),
-      Array.from({ length: 9 }, (_, i) => `Q${i + 1}`),
+      Array.from({ length: 9 }, (_, i) => queTitles[`q${i + 1}`]),
       avgPerQuestion.slice(1, 10),
-      'Κατηγορία 1',
+      'Ανθρωποκεντρικότητα',
       colors.slice(0, 9)
     );
 
     renderChart(
       document.getElementById('category2Chart'),
-      ['Q10', 'Q11', 'Q12', 'Q13'],
+      ['q10', 'q11', 'q12', 'q13'].map(key => queTitles[key]),
       avgPerQuestion.slice(10, 14),
-      'Κατηγορία 2',
-      colors.slice(2, 6)
+      'Κλινική Αποτελεσματικότητα',
+      colors.slice(3, 7)
     );
 
     renderChart(
       document.getElementById('category3Chart'),
-      ['Q14', 'Q15', 'Q16'],
+      ['q14', 'q15', 'q16'].map(key => queTitles[key]),
       avgPerQuestion.slice(14, 17),
-      'Κατηγορία 3',
+      'Ασφάλεια - Απόρρητο',
       colors.slice(6, 9)
     );
 
     renderChart(
       document.getElementById('stdDevCategoryChart'),
-      ['Κατηγορία 1', 'Κατηγορία 2', 'Κατηγορία 3'],
+      ['Ανθρωποκεντρικότητα', 'Κλινική Αποτελεσματικότητα', 'Ασφάλεια - Απόρρητο'],
       stdDevCategory,
       'Τυπική Απόκλιση',
       [colors[3], colors[4], colors[5]]
@@ -242,30 +418,32 @@
 
     renderChart(
         document.getElementById('stdDevCategory1Chart'),
-        Array.from({ length: 9 }, (_, i) => `Q${i + 1}`),
+        Array.from({ length: 9 }, (_, i) => queTitles[`q${i + 1}`]),
         stdDevCategory1Questions,
-        'Τυπική Απόκλιση - Κατηγορία 1',
+        'Τυπική Απόκλιση - Ανθρωποκεντρικότητα',
         colors.slice(0, 9)
         );
 
         renderChart(
         document.getElementById('stdDevCategory2Chart'),
-        ['Q10', 'Q11', 'Q12', 'Q13'],
+        ['q10', 'q11', 'q12', 'q13'].map(key => queTitles[key]),
         stdDevCategory2Questions,
-        'Τυπική Απόκλιση - Κατηγορία 2',
-        colors.slice(2, 6)
+        'Τυπική Απόκλιση - Κλινική Αποτελεσματικότητα',
+        colors.slice(3, 7)
         );
 
         renderChart(
         document.getElementById('stdDevCategory3Chart'),
-        ['Q14', 'Q15', 'Q16'],
+        ['q14', 'q15', 'q16'].map(key => queTitles[key]),
         stdDevCategory3Questions,
-        'Τυπική Απόκλιση - Κατηγορία 3',
+        'Τυπική Απόκλιση - Ασφάλεια - Απόρρητο',
         colors.slice(6, 9)
     );
 
+    document.querySelectorAll('.downloadButtons').forEach(el => el.style.display = "block");
   }
 
+  
   initCharts();
 
     // Όλα τα containers των γραφημάτων
@@ -279,6 +457,29 @@
       box.classList.add('highlighted');
     });
   });
+
+    function downloadChartImage(canvasId, fileName) {
+      const canvas = document.getElementById(canvasId);
+      const url = canvas.toDataURL("image/png");
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${fileName}.png`;
+      link.click();
+  }
+
+  function downloadAllCharts() {
+    const canvases = document.querySelectorAll("canvas");
+    canvases.forEach((canvas, index) => {
+      const fileName = `chart_${canvas.id || index}`;
+      const url = canvas.toDataURL("image/png");
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${fileName}.png`;
+      link.click();
+    });
+  }
 
 </script>
 

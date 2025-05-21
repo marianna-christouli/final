@@ -325,7 +325,7 @@ input[type="text"]:focus {
     }
 
     canvas {
-      max-height: 300px;
+      max-height: 400px;
     }
 
     h3 {
@@ -398,4 +398,116 @@ input[type="text"]:focus {
   to {
     transform: rotate(360deg);
   }
+}
+#pieChartsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+}
+
+#pieChartsContainer .chart-box {
+  flex: 0 1 45%;
+  box-sizing: border-box;
+  margin-bottom: 20px; /* για κάθετη απόσταση */
+}
+
+.chart-box {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.chart-box:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+
+
+@media (max-width: 768px) {
+  #pieChartsContainer {
+    justify-content: center;
+  }
+
+  #pieChartsContainer .chart-box {
+    flex: 0 0 90%;
+    margin: 10px 0;
+  }
+
+  canvas {
+    width: 90% !important;
+    height: auto !important;
+  }
+}
+
+.accordion {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.accordion-item {
+  border-bottom: 1px solid #E5E7EB;
+  padding: 16px 0;
+  transition: all 0.3s ease;
+}
+
+.accordion-header {
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 0;
+  color: #4F46E5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.accordion-body {
+  display: none;
+  padding: 10px 0;
+  color: #374151;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.accordion-item.active .accordion-body {
+  display: block;
+}
+
+.accordion-item.active .accordion-header {
+  color: #A78BFA; /* εναλλακτικό χρώμα όταν είναι ενεργό */
+}
+
+.download-button-container {
+  text-align: center;
+  margin: 60px 0 40px;
+}
+
+.download-button-container button {
+  padding: 12px 24px;
+  font-size: 18px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.download-button-container button:hover {
+  background-color: #3730a3;
+}
+
+.download-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  background-color: #4f46e5;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s;
+}
+
+.download-btn:hover {
+  background-color: #4338ca;
 }
