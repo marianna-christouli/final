@@ -7,76 +7,100 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Αποτελέσματα Χρήστη</h2>
-  <div class="chart-box">
-    <div id="spinner-pieCharts" class="spinner"></div> 
-      <div id="pieChartsContainer" class="chart-wrapper pie-charts" style="display:none;"></div>
-      <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
-          <button class="download-btn" onclick="downloadChartImage('pieChartsContainer', 'Γράφημα Αποτελεσμάτων')">Λήψη Εικόνας</button>
-     </div>
-  </div>
-
- <div class="main-content">
-  <h2>Μέσος Όρος Ανά Διάσταση</h2>
-  <div class="chart-wrapper">
-    <div class="chart-box">
-      <div class="spinner" id="spinner-categoryChart"></div>
-      <canvas id="categoryChart"></canvas>
-      <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
-          <button class="download-btn" onclick="downloadChartImage('categoryChart', 'ΜΟ')">Λήψη Εικόνας</button>
-    </div>
- </div>
-</div>
-
-  <h2>Μέσος Όρος Ερωτήσεων Ανά Διάσταση</h2>
-  <div class="chart-wrapper">
-    <div class="chart-box">
-      <h3>Ανθρωποκεντρικότητα <br>(Ερώτηση 1 - Ερώτηση 9)</h3>
-      <div class="spinner" id="spinner-category1Chart"></div>
-      <canvas id="category1Chart"></canvas>
-      <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
-          <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+  <div class="main-content">
+  <div class="page" style="text-align: justify;">
+    <h2>Αποτελέσματα Χρήστη <span class="info-button">i</span></h2>
+      <div class="info-container" style="display: none; text-align: justify;">
+        <p> PPPP </p>
       </div>
-    </div>
-
     <div class="chart-box">
-      <h3>Κλινική Αποτελεσματικότητα <br>(Ερώτηση 10 - Ερώτηση 13)</h3>
-      <div class="spinner" id="spinner-category2Chart"></div>
-      <canvas id="category2Chart"></canvas>
-      <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
-          <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
-      </div>
-    </div>
-
-    <div class="chart-box">
-      <h3>Ασφάλεια - Απόρρητο <br>(Ερώτηση 14 - Ερώτηση 16)</h3>
-      <div class="spinner" id="spinner-category3Chart"></div>
-      <canvas id="category3Chart"></canvas>
-      <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
-          <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
-      </div>
+      <div id="spinner-pieCharts" class="spinner"></div> 
+        <div id="pieChartsContainer" class="chart-wrapper pie-charts" style="display:none;"></div>
     </div>
   </div>
 
-    <h2>Τυπική Απόκλιση Ανά Κατηγορία</h2>
-    <div class="chart-wrapper">
-    <div class="chart-box">
-        <div class="spinner" id="spinner-stdDevCategoryChart"></div>
-        <canvas id="stdDevCategoryChart"></canvas>
-        <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
-          <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+  <div class="page" style="text-align: justify;">
+      <h2>Μέσος Όρος Ανά Διάσταση <span class="info-button">i</span></h2>
+      <div class="info-container" style="display: none; text-align: justify;">
+        <p> PPPP </p>
+      </div>
+
+      <div class="chart-wrapper">
+        <div class="chart-box">
+          <div class="spinner" id="spinner-categoryChart"></div>
+          <canvas id="categoryChart"></canvas>
+          <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+              <button class="download-btn" onclick="downloadChartImage('categoryChart', 'ΜΟ')">Λήψη Εικόνας</button>
         </div>
       </div>
     </div>
+  </div>
 
-    <h2>Τυπική Απόκλιση Ερωτήσεων Ανά Κατηγορία</h2>
+  <div class="page" style="text-align: justify;">
+    <h2>Μέσος Όρος Ερωτήσεων Ανά Διάσταση <span class="info-button">i</span></h2>
+      <div class="info-container" style="display: none; text-align: justify;">
+        <p> PPPP </p>
+      </div>
+    <div class="chart-wrapper">
+      <div class="chart-box">
+        <h3>Ανθρωποκεντρικότητα <br>(Ερώτηση 1 - Ερώτηση 9)</h3>
+        <div class="spinner" id="spinner-category1Chart"></div>
+        <canvas id="category1Chart"></canvas>
+        <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+            <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <h3>Κλινική Αποτελεσματικότητα <br>(Ερώτηση 10 - Ερώτηση 13)</h3>
+        <div class="spinner" id="spinner-category2Chart"></div>
+        <canvas id="category2Chart"></canvas>
+        <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+            <button class="download-btn" onclick="downloadChartImage('category2Chart', 'ΜΟ_Κλινικής_Αποτελεσματικότητας')">Λήψη Εικόνας</button>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <h3>Ασφάλεια - Απόρρητο <br>(Ερώτηση 14 - Ερώτηση 16)</h3>
+        <div class="spinner" id="spinner-category3Chart"></div>
+        <canvas id="category3Chart"></canvas>
+        <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+            <button class="download-btn" onclick="downloadChartImage('category3Chart', 'ΜΟ_Ασφάλειας_Απορρήτου')">Λήψη Εικόνας</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page" style="text-align: justify;">
+      <h2>Τυπική Απόκλιση Ανά Κατηγορία <span class="info-button">i</span></h2>
+      <div class="info-container" style="display: none; text-align: justify;">
+        <p> PPPP </p>
+      </div>
+
+      <div class="chart-wrapper">
+      <div class="chart-box">
+          <div class="spinner" id="spinner-stdDevCategoryChart"></div>
+          <canvas id="stdDevCategoryChart"></canvas>
+          <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+            <button class="download-btn" onclick="downloadChartImage('stdDevCategoryChart', 'Τυπική_Απόκλιση')">Λήψη Εικόνας</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  <div class="page" style="text-align: justify;">
+    <h2>Τυπική Απόκλιση Ερωτήσεων Ανά Κατηγορία <span class="info-button">i</span></h2>
+    <div class="info-container" style="display: none; text-align: justify;">
+      <p> PPPP </p>
+    </div>
+
     <div class="chart-wrapper">
     <div class="chart-box">
         <h3>Ανθρωποκεντρικότητα <br>(Ερώτηση 1 - Ερώτηση 9)</h3>
         <div class="spinner" id="spinner-stdDevCategory1Chart"></div>
         <canvas id="stdDevCategory1Chart"></canvas>
         <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
-             <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+             <button class="download-btn" onclick="downloadChartImage('stdDevCategory1Chart', 'Τυπική_Απόκλιση_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
       </div>
     </div>
 
@@ -85,7 +109,7 @@
         <div class="spinner" id="spinner-stdDevCategory2Chart"></div>
         <canvas id="stdDevCategory2Chart"></canvas>
         <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
-            <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+            <button class="download-btn" onclick="downloadChartImage('stdDevCategory2Chart', 'Τυπική_Απόκλιση_Κλινικής_Αποτελεσματικότητας')">Λήψη Εικόνας</button>
         </div>
     </div>
 
@@ -94,12 +118,18 @@
         <div class="spinner" id="spinner-stdDevCategory3Chart"></div>
         <canvas id="stdDevCategory3Chart"></canvas>
         <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
-            <button class="download-btn" onclick="downloadChartImage('category1Chart', 'ΜΟ_Ανθρωποκεντρικότητας')">Λήψη Εικόνας</button>
+            <button class="download-btn" onclick="downloadChartImage('stdDevCategory3Chart', 'Τυπική_Απόκλιση_Ασφάλειας_Απορρήτου')">Λήψη Εικόνας</button>
       </div>
     </div>
   </div>
+</div>
+</div>
+  <div class="nav-buttons" style="text-align: center; margin-top: 30px;">
+        <button type="button" class="prevBtn">Προηγούμενη</button>
+       <button type="button" class="nextBtn">Επόμενη</button>
+  </div>
 
-    <div style="text-align: center; margin: 40px 0;">
+    <div class="dow" style="text-align: center; margin: 40px 0;">
       <button onclick="downloadAllCharts()" style="
         padding: 10px 20px;
         font-size: 16px;
@@ -109,17 +139,16 @@
         border-radius: 8px;
         cursor: pointer;
       ">
-        ⬇️ Λήψη Όλων των Γραφημάτων
+        Λήψη Όλων των Γραφημάτων
       </button>
     </div>
-
-
-    </div>
+  </div>
       <p class="switch-page">
          <b>Για να αξιολογήσετε νέα υπηρεσία πατήστε <a href="ins.html">εδώ</a>.</b><br>
           Για να επιστρέψετε στην αρχική σελίδα πατήστε <a href="index.html">εδώ</a>.
       </p>
   <script>
+    
   const scriptUrl = "https://script.google.com/macros/s/AKfycbwLq4GsrjigTjy0bgF1_czclUcgk9icc9oUw0GcLk-8fDzhgvrYkrBXKU3eEktmxkTI/exec";
   const colors = [
       'rgba(79, 70, 229, 0.6)',  // Indigo
@@ -217,13 +246,22 @@
           legend: {
             display: true, // Εμφάνιση υπομνήματος
             labels: {
+              boxWidth: 20,      // Μέγεθος χρωματικού τετραγώνου
+              padding: 10,  
               generateLabels: function(chart) {
-                return labels.map((label, index) => ({
-                  text: label,
-                  fillStyle: colors[index],
-                  strokeStyle: colors[index],
-                  index: index
-                }));
+                return labels.map((label, index) => {
+                  const maxLength = 30;  // πχ μέγιστοι χαρακτήρες
+                  let displayText = label;
+                  if (label.length > maxLength) {
+                    displayText = label.substring(0, maxLength) + '...';
+                  }
+                  return {
+                    text: displayText,
+                    fillStyle: colors[index],
+                    strokeStyle: colors[index],
+                    index: index
+                  };
+                });
               }
             }
           },
@@ -300,10 +338,14 @@
       chartWrapper.innerHTML = `
           <h3>${service}</h3>
           <canvas id="pieChart${index}"></canvas>
-          <button onclick="downloadChartImage('pieChart${index}', 'PieChart_${service.replaceAll(' ', '_')}')">
-            Λήψη Εικόνας
-          </button>
+          <div class="downloadButtons" style="display: none; text-align: center; margin-top: 20px;">
+            <button class="download-btn" onclick="downloadChartImage('pieChart${index}', 'PieChart_${service.replaceAll(' ', '_')}')">
+              Λήψη Εικόνας
+            </button>
+          </div>
         `;
+
+      document.querySelectorAll('#pieChartsContainer .downloadButtons').forEach(el => el.style.display = "block");
 
       pieChartsContainer.appendChild(chartWrapper);
 
@@ -323,7 +365,7 @@
         },
         options: {
           responsive: true,
-          plugins: {
+          plugins: {          
             tooltip: {
               callbacks: {
                 label: ctx => `${ctx.label}: ${ctx.raw.toFixed(2)}`
@@ -480,6 +522,61 @@
       link.click();
     });
   }
+
+  // Βρίσκει όλα τα info buttons και τα συνδέει με το αμέσως επόμενο info-container
+  document.querySelectorAll('.info-button').forEach(button => {
+    button.addEventListener('click', () => {
+      const container = button.parentElement.nextElementSibling;
+      if (container && container.classList.contains('info-container')) {
+        container.style.display = container.style.display === 'none' ? 'block' : 'none';
+      }
+    });
+  });
+
+  const pages = document.querySelectorAll('.page');
+  let currentPageIndex = 0;
+  const dow = document.querySelector(".dow"); // ή ό,τι id έχει
+
+  function showPage(index) {
+      pages.forEach((p, i) => {
+          p.style.display = i === index ? "block" : "none";
+      });
+
+      const currentPage = pages[index];
+      const prevBtn = currentPage.querySelector(".prevBtn");
+      const nextBtn = currentPage.querySelector(".nextBtn");
+
+        // Ενεργοποίηση/απενεργοποίηση κουμπιών
+        prevBtn.style.display = index === 0 ? "none" : "inline-block";
+
+        if (index === pages.length - 1) {
+            nextBtn.style.display = "none";         // Απόκρυψη "Επόμενο"
+            dow.style.display = "block"; // Εμφάνιση "Υποβολή"
+        } else {
+            nextBtn.style.display = "inline-block";  // Εμφάνιση "Επόμενο"
+            dow.style.display = "none";  // Απόκρυψη "Υποβολή"
+        }
+    }   
+
+    document.querySelectorAll(".prevBtn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            if (currentPageIndex > 0) {
+                currentPageIndex--;
+                showPage(currentPageIndex);
+            }
+        });
+    });
+
+    document.querySelectorAll(".nextBtn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            if (currentPageIndex < pages.length - 1) {
+                currentPageIndex++;
+                showPage(currentPageIndex);
+            }
+        });
+    });
+
+    showPage(currentPageIndex);
 
 </script>
 

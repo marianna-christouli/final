@@ -291,13 +291,7 @@ input[type="text"]:focus {
         max-width: 300px;
     }
 }
- body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f9fafb;
-      margin: 0;
-      padding: 40px 20px;
-      color: #1F2937;
-    }
+
 
     h2 {
       text-align: center;
@@ -438,6 +432,12 @@ input[type="text"]:focus {
   }
 }
 
+.chart-box canvas {
+  width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
 .accordion {
   width: 100%;
   margin-top: 30px;
@@ -510,4 +510,107 @@ input[type="text"]:focus {
 
 .download-btn:hover {
   background-color: #4338ca;
+}
+
+    .info-button {
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      color: #007bff;
+      font-size: 14px;
+    }
+
+    .info-button:hover .tooltip,
+    .info-button:focus .tooltip {
+      display: block;
+    }
+
+    .tooltip {
+      display: none;
+      position: absolute;
+      top: 25px;
+      left: 0;
+      width: 300px;
+      background: #fff;
+      color: #000;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 15px;
+      font-size: 13px;
+      line-height: 1.5;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .tooltip strong {
+      display: block;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .tooltip ul {
+      padding-left: 20px;
+      margin: 5px 0;
+    }
+
+    .tooltip ul li {
+      margin-bottom: 5px;
+    }
+    
+.info-container {
+    background-color: var(--beige); /* Χρησιμοποιούμε το ίδιο υπόβαθρο όπως το .purpose */
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    transition: box-shadow var(--transition);
+    display: block; /* Όχι πλέον κρυφό */
+    text-align: center;
+    color: var(--dark-blue); /* Χρώμα κειμένου */
+}
+
+.info-container p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.info-container p:first-child {
+    font-weight: bold; /* Έντονη γραφή για την πρώτη παράγραφο */
+}
+
+.info-container ul {
+    list-style-type: disc;
+    padding-left: 20px; /* Απόσταση για καλύτερη εμφάνιση */
+}
+
+.info-container ul li {
+    font-size: 16px;
+    margin-bottom: 5px; /* Ελαφριά απόσταση ανάμεσα στις λίστες */
+}
+
+.info-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px; /* Μέγεθος του κουμπιού */
+    height: 20px; /* Ίδιο ύψος με πλάτος για να γίνει στρογγυλό */
+    border: 2px solid #4F46E5; /* Χρώμα πλαισίου */
+    border-radius: 50%; /* Στρογγυλοποίηση */
+    font-size: 18px; /* Μέγεθος του "i" */
+    color: #4F46E5; /* Χρώμα του κειμένου */
+    font-weight: bold; /* Έντονη γραφή */
+    cursor: pointer; /* Για να δείχνει ότι είναι κλικαρίσιμο */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Εφέ για hover */
+}
+.info-button:hover {
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.15); /* Προσθέτουμε εφέ hover */
+}
+
+.page {
+  display: none;
+}
+.page.active {
+  display: block;
 }
