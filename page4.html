@@ -387,12 +387,11 @@
       container.style.display = 'block'; // Εμφανίζουμε τα γραφήματα
   }
 
-
   async function initCharts() {
     const answers = await fetchAnswers();
     createPieChartsPerService(answers);
     const { avgCategory, avgPerQuestion } = calculateAverages(answers);
-
+    
     function calculateStdDev(arr) {
       const n = arr.length;
       if (n === 0) return 0;
@@ -487,7 +486,6 @@
         'Τυπική Απόκλιση - Ασφάλεια - Απόρρητο',
         colors.slice(6, 9)
     );
-
     document.querySelectorAll('.downloadButtons').forEach(el => el.style.display = "block");
   }
 
@@ -506,7 +504,7 @@
     });
   });
 
-    function downloadChartImage(canvasId, fileName) {
+  function downloadChartImage(canvasId, fileName) {
       const canvas = document.getElementById(canvasId);
       const url = canvas.toDataURL("image/png");
 
